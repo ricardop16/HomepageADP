@@ -5,12 +5,24 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 require("reflect-metadata");
 const express_1 = __importDefault(require("express"));
+const cors_1 = __importDefault(require("cors"));
 const usuario_routes_1 = __importDefault(require("./routes/usuario.routes"));
 const miembro_routes_1 = __importDefault(require("./routes/miembro.routes"));
+const nivel_routes_1 = __importDefault(require("./routes/nivel.routes"));
+const asamblea_routes_1 = __importDefault(require("./routes/asamblea.routes"));
+const asistencia_routes_1 = __importDefault(require("./routes/asistencia.routes"));
+const area_routes_1 = __importDefault(require("./routes/area.routes"));
+const traslado_routes_1 = __importDefault(require("./routes/traslado.routes"));
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
+app.use((0, cors_1.default)());
 app.use('/api', usuario_routes_1.default);
 app.use('/api', miembro_routes_1.default);
+app.use('/api', nivel_routes_1.default);
+app.use('/api', asamblea_routes_1.default);
+app.use('/api', asistencia_routes_1.default);
+app.use('/api', area_routes_1.default);
+app.use('/api', traslado_routes_1.default);
 const por = 1235;
 app.listen(por, () => {
     console.log('server listening on port Localhost: ${port}');
