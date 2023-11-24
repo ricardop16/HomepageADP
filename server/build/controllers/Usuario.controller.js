@@ -1,4 +1,48 @@
 "use strict";
+/*
+import { Request, Response } from "express";
+import Usuario from "../models/Usuario.model";
+import UsuarioRepository from "../repositories/Usuario.repository";
+
+export default class UsuarioController {
+  async createUsuario(req: Request, res: Response) {
+    if (!req.body.email) {
+      res.status(400).send({
+        message: "Content can not be empty!"
+      });
+      return;
+    }
+    try {
+      const Usuario: Usuario = req.body;
+      const savedUsuario = await UsuarioRepository.save(Usuario);
+
+      res.status(201).send(savedUsuario);
+    } catch (err) {
+      res.status(500).send({
+        message: "Some error occurred while retrieving tutorials."
+      });
+    }
+  }
+  async getUsuario(req: Request, res: Response) {
+    const id: number = parseInt(req.params.id);
+
+    try {
+      const Usuario = await UsuarioRepository.retrieveById(id);
+
+      if (Usuario) res.status(200).send(Usuario);
+      else
+        res.status(404).send({
+          message: `Cannot find Usuario with id=${id}.`
+        });
+    } catch (err) {
+      res.status(500).send({
+        message: `Error retrieving Usuario with id=${id}.`
+      });
+    }
+  }
+}
+  
+*/
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -18,13 +62,14 @@ const getusuarios = (_req, res) => __awaiter(void 0, void 0, void 0, function* (
 exports.getusuarios = getusuarios;
 const getusuario = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const [rows] = yield database_1.pool.query('SELECT * FROM Usuario WHERE id_user = ?', [req.params.id]);
+    console.log(rows[0].contrasena);
     res.json(rows);
 });
 exports.getusuario = getusuario;
 const createusuario = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { nombre, apellido, email, contrasena, nivel, fecha_registro } = req.body;
     const [rows] = yield database_1.pool.query('INSERT INTO Usuario (nombre, apellido, email, contrasena, nivel, fecha_registro) VALUES (?,?,?,?,?, fecha_registro)', [nombre, apellido, email, contrasena, nivel, fecha_registro]);
-    console.log(req.body);
+    console.log(rows);
     res.json({
         msg: 'Usuario Creado',
         rows

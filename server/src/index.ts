@@ -1,6 +1,7 @@
 import 'reflect-metadata'
 import express from 'express'
 import cors from 'cors'
+import bodyParser from 'body-parser'
 
 
 import UserRoutes from './routes/usuario.routes'
@@ -10,15 +11,20 @@ import AsambleaRoutes from './routes/asamblea.routes'
 import AsistenciaRoutes from './routes/asistencia.routes'
 import AreaRoutes from './routes/area.routes'
 import TrasladoRoutes from './routes/traslado.routes' 
-
+import authRoutes from './routes/auth.routes' 
+import cookieParser from 'cookie-parser'
 
 const app = express()
 
-app.use(express.json())
+
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(cookieParser())
 app.use(cors())
 
 
 
+app.use('/api', authRoutes)
 app.use('/api', UserRoutes)
 app.use('/api', MiembroRoutes)
 app.use('/api', NivelRoutes)
@@ -28,8 +34,9 @@ app.use('/api', AreaRoutes)
 app.use('/api', TrasladoRoutes)
 
 
-const por = 1235
+
+const por = 1232
 app.listen(por, () =>  {
-console.log('server listening on port Localhost: ${port}')
+console.log('server listening on port Localhost: ${por}')
 console.log(por)
 }) 
