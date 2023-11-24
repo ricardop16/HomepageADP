@@ -64,3 +64,11 @@ export const login:RequestHandler = async(req, res) =>{
     }
   
 }
+
+export const logout:RequestHandler =(_req,res) => {
+    res.cookie("token", " ",
+    {
+        expires: new Date(0)
+    })
+    return res.sendStatus(200)
+}
