@@ -1,9 +1,10 @@
 import {Router} from "express";
 import  * as usuarioctrl from "../controllers/Usuario.controller";
+import { AuthRequired } from "../middleware/Auth.middleware";
 
 const router = Router()
 
-router.get('/usuario', usuarioctrl.getusuarios)
+router.get('/usuario',  AuthRequired, usuarioctrl.getusuarios)
 router.get('/usuario/:id', usuarioctrl.getusuario)
 
 

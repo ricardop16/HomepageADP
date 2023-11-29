@@ -12,17 +12,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.logout = exports.login = exports.register = void 0;
+exports.profile = exports.logout = exports.login = exports.register = void 0;
 const database_1 = require("../config/database");
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { nombre, apellido, email, contrasena, nivel, fecha_registro } = req.body;
+    const { nombre, apellido, email, contrasena, nivel } = req.body;
+    const fecha_registro = req.params.Date;
     bcrypt_1.default.hash(contrasena, 10, (error, hashcontra) => __awaiter(void 0, void 0, void 0, function* () {
         if (error)
             throw error;
         try {
-            const [rows] = yield database_1.pool.query('INSERT INTO Usuario (nombre, apellido, email, contrasena, nivel, fecha_registro) VALUES (?,?,?,?,?, fecha_registro)', [nombre, apellido, email, hashcontra, nivel, fecha_registro]);
+            const [rows] = yield database_1.pool.query('INSERT INTO Usuario (nombre, apellido, email, contrasena, nivel, fecha_registro) VALUES (?,?,?,?,?,?)', [nombre, apellido, email, hashcontra, nivel, fecha_registro]);
             console.log(rows);
             return res.status(200).json({
                 msg: 'registrando',
@@ -31,7 +32,8 @@ const register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         }
         catch (error) {
             return res.status(500).json({
-                msg: 'something were wrong'
+                msg: 'something were wrong',
+                error
             });
         }
     }));
@@ -40,6 +42,7 @@ exports.register = register;
 const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { email, contrasena } = req.body;
     const [rows] = yield database_1.pool.query('SELECT * FROM Usuario WHERE email = ?', [email]);
+    const userid = rows[0].id_user;
     if (!rows) {
         res.status(400).json({ message: 'email invalido' });
     }
@@ -51,6 +54,7 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             if (resultado) {
                 const token = jsonwebtoken_1.default.sign({
                     email: email,
+                    user: userid
                 }, 'pepito123');
                 res.status(200).cookie("token", token).json({ message: 'Usuario logeado' });
             }
@@ -62,9 +66,14 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 });
 exports.login = login;
 const logout = (_req, res) => {
-    res.cookie("token", " ", {
+    res.cookie("token", "", {
         expires: new Date(0)
     });
     return res.sendStatus(200);
 };
 exports.logout = logout;
+const profile = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const [userfound] = yield database_1.pool.query('SELECT * FROM Usuario WHERE id_user = ?', [req.body]);
+    return res.json(userfound);
+});
+exports.profile = profile;

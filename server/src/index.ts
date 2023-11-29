@@ -2,6 +2,8 @@ import 'reflect-metadata'
 import express from 'express'
 import cors from 'cors'
 import bodyParser from 'body-parser'
+import cookieParser from 'cookie-parser'
+
 
 
 import UserRoutes from './routes/usuario.routes'
@@ -12,7 +14,7 @@ import AsistenciaRoutes from './routes/asistencia.routes'
 import AreaRoutes from './routes/area.routes'
 import TrasladoRoutes from './routes/traslado.routes' 
 import authRoutes from './routes/auth.routes' 
-import cookieParser from 'cookie-parser'
+
 
 const app = express()
 
