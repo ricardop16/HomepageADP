@@ -9,7 +9,7 @@ function App(){
     
     <BrowserRouter>
       <Routes>
-      <Route path="/" element={<h1 className='w-full bg-zinc-700 text-white px-4 py-2 rounded-md my-2'>Home Page</h1>} />
+      <Route path="/" element={<h1 className='text-3xl font-bold underline'>Home Page</h1>} />
       <Route path="/login" element={<LoginPage></LoginPage>} />
       <Route path="/register" element={<RegisterPage></RegisterPage>} />
       </Routes>

@@ -1,0 +1,9 @@
+
+function (){
+    return (
+        <div> Page</div>
+    )
+
+}
+
+export default Pages
