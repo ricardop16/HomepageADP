@@ -26,5 +26,5 @@ exports.registerSchema = zod_1.z.object({
 });
 exports.loginSchema = zod_1.z.object({
     email: zod_1.z.string().email().min(1),
-    password: zod_1.z.string().min(6),
+    contrasena: zod_1.z.string().min(6),
 });

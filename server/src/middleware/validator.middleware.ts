@@ -5,7 +5,7 @@ export const schemaValition =
   (schema: AnyZodObject) =>
   (req: Request, res: Response, next: NextFunction) => {
     try {
-      schema.parse({
+      schema.safeParse({
         body: req.body,
         params: req.params,
         query: req.query,

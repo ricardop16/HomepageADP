@@ -6,6 +6,8 @@ const schemaValition = (schema) => (req, res, next) => {
     try {
         schema.parse({
             body: req.body,
+            params: req.params,
+            query: req.query,
         });
         return next();
     }
@@ -17,7 +19,7 @@ const schemaValition = (schema) => (req, res, next) => {
                 message: issue.message,
             })));
         }
-        return res.status(400).json({ message: "internal server error" });
+        return res.status(500).json({ message: "internal server error" });
     }
 };
 exports.schemaValition = schemaValition;
