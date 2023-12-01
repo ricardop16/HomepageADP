@@ -12,20 +12,27 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.profile = exports.logout = exports.login = exports.register = void 0;
+exports.verifyToken = exports.profile = exports.logout = exports.login = exports.register = void 0;
 const database_1 = require("../config/database");
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { nombre, apellido, email, contrasena, nivel } = req.body;
+    const { nombre, apellido, email, contrasena, } = req.body;
     const fecha_registro = req.params.Date;
+    const nivel = 1;
     bcrypt_1.default.hash(contrasena, 10, (error, hashcontra) => __awaiter(void 0, void 0, void 0, function* () {
         if (error)
             throw error;
         try {
             const [rows] = yield database_1.pool.query('INSERT INTO Usuario (nombre, apellido, email, contrasena, nivel, fecha_registro) VALUES (?,?,?,?,?,?)', [nombre, apellido, email, hashcontra, nivel, fecha_registro]);
             console.log(rows);
-            return res.status(200).json({
+            const [userfound] = yield database_1.pool.query('SELECT * FROM Usuario WHERE email = ?', [email]);
+            const userid = userfound[0].id_user;
+            const token = jsonwebtoken_1.default.sign({
+                email: email,
+                user: userid
+            }, 'pepito123');
+            return res.status(200).cookie("token", token).json({
                 msg: 'registrando',
                 rows
             });
@@ -37,6 +44,7 @@ const register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             });
         }
     }));
+    return;
 });
 exports.register = register;
 const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -56,7 +64,15 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                     email: email,
                     user: userid
                 }, 'pepito123');
-                res.status(200).cookie("token", token).json({ message: 'Usuario logeado' });
+                res.status(200).cookie("token", token, {
+                    httpOnly: false,
+                    secure: true,
+                    sameSite: 'none'
+                }).json({
+                    id: userid,
+                    email: email,
+                    message: 'Usuario logeado'
+                });
             }
             else {
                 res.status(401).json({ message: 'contraseña no es valida' });
@@ -77,3 +93,17 @@ const profile = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     return res.json(userfound);
 });
 exports.profile = profile;
+const verifyToken = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { token } = req.cookies;
+    if (!token)
+        return res.status(401).json({ message: "Unauthorized" });
+    const payload = jsonwebtoken_1.default.verify(token, 'pepito123');
+    const [userfound] = yield database_1.pool.query('SELECT * FROM Usuario WHERE id_user = ?', [payload.user]);
+    if (!userfound)
+        return res.status(401).json({ message: "Unauthorized" });
+    return res.json({
+        id: userfound[0].id_user,
+        email: userfound[0].email
+    });
+});
+exports.verifyToken = verifyToken;

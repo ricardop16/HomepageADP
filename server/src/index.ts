@@ -22,7 +22,10 @@ const app = express()
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cookieParser())
-app.use(cors())
+app.use(cors({
+    origin: 'http://localhost:5174',
+    credentials: true
+}))
 
 
 

@@ -24,6 +24,6 @@ export const registerSchema = z.object({
   });
   
   export const loginSchema = z.object({
-    email: z.string().email().min(1),
-    contrasena: z.string().min(6),
+    email: z.string().email(),
+    contrasena: z.string(),
   });
