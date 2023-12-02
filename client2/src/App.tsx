@@ -1,18 +1,25 @@
+
 /*import { BrowserRouter, Routes,Route } from "react-router-dom"
+=======
+import { BrowserRouter, Routes,Route } from "react-router-dom"
+import { AuthProvider } from "./context/AuthContext"
+>>>>>>> ab1a07df23d902f3ee6b4da9528841a5fcdd427b
 
 import RegisterPage from "./pages/RegisterPage"
 import LoginPage from "./pages/LoginPage"
 
 function App(){
   return (
-    
-    <BrowserRouter>
+    <AuthProvider>
+      <BrowserRouter>
       <Routes>
       <Route path="/" element={<h1 className='text-3xl font-bold underline'>ADP Vicente Noble</h1>} />
       <Route path="/login" element={<LoginPage></LoginPage>} />
       <Route path="/register" element={<RegisterPage></RegisterPage>} />
       </Routes>
     </BrowserRouter>
+    </AuthProvider>
+    
   )
 }*/
 

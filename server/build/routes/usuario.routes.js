@@ -28,7 +28,7 @@ const usuarioctrl = __importStar(require("../controllers/Usuario.controller"));
 const Auth_middleware_1 = require("../middleware/Auth.middleware");
 const router = (0, express_1.Router)();
 router.get('/usuario', Auth_middleware_1.AuthRequired, usuarioctrl.getusuarios);
-router.get('/usuario/:id', usuarioctrl.getusuario);
+router.get('/usuario/:id', Auth_middleware_1.AuthRequired, usuarioctrl.getusuario);
 router.post('/usuario', usuarioctrl.createusuario);
 router.delete('/usuario/:id', usuarioctrl.deleteusuario);
 router.patch('/usuario/:id', usuarioctrl.updateusuario);

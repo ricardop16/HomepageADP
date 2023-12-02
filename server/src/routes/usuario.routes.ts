@@ -4,8 +4,8 @@ import { AuthRequired } from "../middleware/Auth.middleware";
 
 const router = Router()
 
-router.get('/usuario',  AuthRequired, usuarioctrl.getusuarios)
-router.get('/usuario/:id', usuarioctrl.getusuario)
+router.get('/usuario', AuthRequired,usuarioctrl.getusuarios)
+router.get('/usuario/:id',AuthRequired, usuarioctrl.getusuario)
 
 
 router.post('/usuario', usuarioctrl.createusuario)
