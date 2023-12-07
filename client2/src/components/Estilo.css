@@ -1,0 +1,6 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* aqui iban a ir los estilos pero logre ponerlos usando tailwindcss y 
+los que no pudo ponerlos asi, se quedaron en el index.css */

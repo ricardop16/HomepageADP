@@ -20,18 +20,26 @@ function App(){
     </BrowserRouter>
     </AuthProvider>
     
+
+        <footer>Copyright © 2023 ADP Vicente Noble | Todos los derechos reservados</footer>
+
+
   )
 }*/
 
 import { useState } from 'react';
+
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
-import Inicio from './pages/Inicio';
-import Nosotros from './pages/Nosotros';
-import Historia from './pages/Historia';
-import MisionVisionValores from './pages/MisionVisionValores';
-import Contacto from './pages/Contacto';
-import IniciarSesion from './pages/IniciarSesion';
+import Inicio from './components/Inicio';
+import Nosotros from './components/Nosotros';
+import Historia from './components/Historia';
+import MisionVisionValores from './components/MisionVisionValores';
+import Contacto from './components/Contacto';
+import IniciarSesion from './components/IniciarSesion';
+
+import FooterHomepage from './components/Footer';
+
 
 function DropdownMenu() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -60,7 +68,7 @@ function DropdownMenu() {
 function App() {
   return (
     <Router>
-      <div className="App">
+      <div className="App bg-gray-300 text-black flex flex-col min-h-screen">
         <header className="App-header">
           
           {/* Barra de Navegación */}
@@ -89,7 +97,9 @@ function App() {
             <Route path="/IniciarSesion" element={<IniciarSesion />} />
           </Routes>
 
-          <footer>Copyright © 2023 ADP Vicente Noble | Todos los derechos reservados</footer>
+          {/* Esto incluye el FooterHomepage */}
+          <FooterHomepage />
+
         </header>
         </div>
     </Router>
