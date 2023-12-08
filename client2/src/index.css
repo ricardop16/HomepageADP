@@ -2,85 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
-
-/*body{
-  background: #e0e0e0;
-  color: rgb(3, 3, 3);
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh; /* Establece el mínimo del 100% del alto de la ventana (viewport height) */
-  /*margin: 0;
-}/*
-
-/* ancho del contenido */
-/*.container {
-  max-width: 800px; 
-  margin: 0 auto; /* Centra el contenido en el medio */
- /* padding: 20px;
-}
-
-/* Estilos de todos los titulos de las paginas  */
-/*h1 {
-  color: #Bf050d;
-  text-align: center;
-  margin-bottom: 10px;
-  font-size: 40px;
-  font-weight: bold; /* Agregado para darle grosor al texto */
-  /*font-family: 'Arial'; /* Cambia a cualquier tipo de letra que desees */
-/*}
-
-/*Estilos de todos los sub-titulos de las paginas*/
-
-/*h2{
-  color: #Bf050d;
-  text-align: center;
-  margin-bottom: 10px;
-  font-size: 30px;
-  font-weight: bold; 
-  font-family: 'Arial'; 
-}
-*/
-
-/*p {
-  text-align: center;
-  text-align: justify;
-  font-size: 16px;     
-  margin-bottom: 15px;
-  line-height: 1.5; /* Espaciado entre líneas */
-  /*margin-bottom: 20px; /* Espaciado entre párrafos */
-/*}
-
-/* Gracias por visitar/INICIO */
-/*p {
-  text-align: center;
-  font-size: 20px;
-}
-
-/*footer {
-  text-align: center;
-  padding: 30px;
-  margin-top: auto; /* Empuja el footer hacia la parte inferior */
-/*}
-
-
-/* TODO LO QUE ESTA ARRIBA DE ESTE COMENTARIO FUE COMENTADO PORQUE
-LOS ESTILOS QUE APARECEN ARRIBA LOS APLIQUE CON TAILWINDCSS EN EL MISMO 
-COMPONENTE CON EL CLASSNAME  */
-
-
-
-
-
 /* Estilos de la barra de navegación */
-nav {
-  background-color: #002d6b; /* Cambia a cualquier color que desees */
+.barranavegacionhp {
+  background-color: #002d6b; 
   color: white;
   padding: 20px;
   text-align: center;
 }
 
 /* Estilos de la lista de navegación ESTO LA MODIFICA */
-nav ul {
+.barranavegacionhp ul {
   list-style: none;
   display: flex; /* Hace que los elementos de la lista se muestren en línea */
   justify-content: center; /* Centra los elementos horizontalmente */
@@ -89,37 +20,30 @@ nav ul {
 }
 
 /* puntero / barra navegacion */
-nav ul li :hover {
+.barranavegacionhp ul li :hover {
   color: #Bf050d;
 }
 
 /* Estilos de cada elemento de la lista de navegación */
-nav li {
+.barranavegacionhp li {
   margin-right: 20px; /* Espacio entre elementos de la lista */
   margin-left: 20px;
 }
 
-
-
 /* Estilos de los enlaces de la lista de navegación */
-nav a {
+.barranavegacionhp a {
   text-decoration: none;
   color: white;
   font-weight: bold;
   font-size: 16px;
 }
 
-main {
-  flex: 1;
-}
-
-
 /* Estilos para el menú desplegable */
-.dropdown {
+.dropdown-hp {
   position: relative;
 }
 
-.dropdown-content {
+.dropdown-contenido-hp {
   display: none;
   position: absolute;
   top: 100%;
@@ -133,26 +57,20 @@ main {
 }
 
 /* menu desplegable*/
-.dropdown:hover .dropdown-content {
+.dropdown-hp:hover .dropdown-contenido-hp {
   display: block;
   text-align: center;
 }
 
 /* Estilo para los elementos del menú desplegable */
-.dropdown-content li {
+.dropdown-contenido-hp li {
   padding: 10px;
   width: 85%;
 }
 
-ol li {
-  position: relative;
-  counter-increment: my-counter; /* Incrementa el contador personalizado */
-  margin-bottom: 10px;
-  text-align: justify;
-}
-
-ul li {   /* creo que es lista valores */
+.dropdown-hp li {   /* creo que es lista valores */
   margin-bottom: 10px;
   text-align: center;
 }
+
 

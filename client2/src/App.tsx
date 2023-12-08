@@ -49,10 +49,10 @@ function DropdownMenu() {
   };
 
   return (
-    <li className="dropdown" onClick={handleDropdownToggle}>
+    <li className="dropdown-hp" onClick={handleDropdownToggle}>
       <Link to="/Nosotros">Nosotros</Link>
       {isDropdownOpen && (
-        <ul className="dropdown-content">
+        <ul className="dropdown-contenido-hp">
           <li>
             <Link to="/Nosotros/Historia">Historia</Link>
           </li>
@@ -72,7 +72,7 @@ function App() {
         <header className="App-header">
           
           {/* Barra de Navegación */}
-          <nav>
+          <nav className='barranavegacionhp'>
             <ul>
               <li>
                 <Link to="/Inicio">Inicio</Link>
